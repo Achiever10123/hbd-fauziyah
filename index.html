@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            transition: opacity 0.8s ease-out;
+        }
+
+        .loader {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        .loader-inner {
+            width: 100%;
+            height: 100%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .loader-circle {
+            position: absolute;
+            width: 70%;
+            height: 70%;
+            top: 15%;
+            left: 15%;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite reverse;
+        }
+
+        .loader-text {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Password Screen */
+        #password-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 20, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .lock-icon {
+            font-size: 5rem;
+            color: #ff7e5f;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .password-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .password-title {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #ffb6c1;
+        }
+
+        .password-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        .password-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .password-input {
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-align: center;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .password-input:focus {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .submit-btn {
+            padding: 15px;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 600;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 10px;
+            height: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 80px 20px 30px;
+            position: relative;
+        }
+
+        .birthday-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            color: #ffb6c1;
+            text-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .name-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .birthday-message {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0ff;
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            background: rgba(255, 255, 255, 0.05);
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #ffb6c1;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-box {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffb6c1;
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 30px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #ffb6c1;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            margin: 10px auto;
+            border-radius: 3px;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .main-image-container {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 182, 193, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .thumbnails-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover, .thumbnail.active {
+            opacity: 1;
+            transform: translateY(-5px);
+            border-color: #ffb6c1;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Secret Message */
+        .secret-section {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 40px auto;
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 800px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secret-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+        }
+
+        .heart-icon {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 25px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.2); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.2); }
+            70% { transform: scale(1); }
+        }
+
+        .secret-message {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #e0e0ff;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+            position: relative;
+            padding: 20px;
+        }
+
+        .secret-message:before,
+        .secret-message:after {
+            content: '"';
+            font-size: 3rem;
+            color: rgba(255, 182, 193, 0.5);
+            position: absolute;
+        }
+
+        .secret-message:before {
+            top: -10px;
+            left: -20px;
+        }
+
+        .secret-message:after {
+            bottom: -40px;
+            right: -20px;
+        }
+
+      
+
+        /* Interactive Cake */
+        .cake-section {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .cake-container {
+            position: relative;
+            height: 300px;
+            margin: 40px auto;
+        }
+
+        .cake {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 150px;
+            background: linear-gradient(to bottom, #ffb6c1, #ff7e5f);
+            border-radius: 50% 50% 0 0;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .cake:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .candle {
+            position: absolute;
+            width: 8px;
+            height: 60px;
+            background: #fff;
+            top: -60px;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .candle:nth-child(1) { left: 35%; }
+        .candle:nth-child(2) { left: 50%; }
+        .candle:nth-child(3) { left: 65%; }
+
+        .flame {
+            position: absolute;
+            width: 15px;
+            height: 30px;
+            background: linear-gradient(to top, #ffd700, #ff7e5f);
+            border-radius: 50% 50% 20% 20%;
+            top: -90px;
+            animation: flicker 1.5s infinite alternate;
+            opacity: 0.8;
+        }
+
+        .flame:nth-child(4) { left: 34%; }
+        .flame:nth-child(5) { left: 49%; }
+        .flame:nth-child(6) { left: 64%; }
+
+        @keyframes flicker {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .blow-btn {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+
+        .blow-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+        }
+
+        /* Message Box */
+        .message-box-container {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            cursor: pointer;
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .message-box-container.show {
+            top: 30px;
+            animation: bounce 0.8s ease;
+        }
+
+        @keyframes bounce {
+            0% { top: -100px; }
+            50% { top: 50px; }
+            70% { top: 25px; }
+            100% { top: 30px; }
+        }
+
+        .message-title {
+            font-size: 1.2rem;
+            color: #ffb6c1;
+            margin-bottom: 10px;
+        }
+
+        .message-content {
+            font-size: 1rem;
+            color: #e0e0ff;
+            line-height: 1.5;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 25px;
+            height: 25px;
+            background: rgba(255, 182, 193, 0.3);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-heart {
+            color: #ff6b6b;
+            margin: 0 5px;
+        }
+
+        .linker{
+          background-color: #ff6b6b;  
+          color: white;
+          text-decoration: none;
+          padding: 2.65%;
+          margin: 10px;
+          border-radius: 50px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .birthday-title {
+                font-size: 3.5rem;
+            }
+            
+            .name-title {
+                font-size: 2rem;
+            }
+            
+            .main-image-container {
+                height: 350px;
+            }
+            
+            .password-title {
+                font-size: 1.8rem;
+            }
+            
+            .secret-message {
+                font-size: 1.2rem;
+            }
+            
+          
+            .countdown-box {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .birthday-title {
+                font-size: 2.8rem;
+            }
+            
+            .name-title {
+                font-size: 1.7rem;
+            }
+            
+            .main-image-container {
+                height: 280px;
+            }
+            
+            .password-container {
+                padding: 30px 20px;
+            }
+            
+            .password-title {
+                font-size: 1.6rem;
+            }
+            
+            .thumbnails-container {
+                gap: 10px;
+            }
+            
+            .thumbnail {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .cake {
+                width: 200px;
+            }
+            
+            .countdown-box {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .countdown-value {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="loader-inner"></div>
+            <div class="loader-circle"></div>
+        </div>
+        <div class="loader-text">Loading Special Moments...</div>
+    </div>
+
+    <!-- Password Screen -->
+    <div id="password-screen">
+        <div class="lock-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        <div class="password-container">
+            <h2 class="password-title">Unlock the Celebration</h2>
+            <p class="password-subtitle">Enter the special date to reveal the birthday surprise</p>
+            <div class="password-form">
+                <input type="password" class="password-input" id="password-input" placeholder="Enter DDMM (e.g., 2408)" autocomplete="off">
+                <button class="submit-btn" id="submit-btn">Unlock Celebration</button>
+                <div class="error-message" id="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Particle Background -->
+        <div id="particles-js"></div>
+
+        <!-- Message Box -->
+        <div class="message-box-container" id="message-box">
+            <div class="close-btn" id="close-btn">
+                <i class="fas fa-times"></i>
+            </div>
+            <h3 class="message-title">Special Message</h3>
+            <p class="message-content">Click here to reveal a special birthday wish!</p>
+        </div>
+
+        <header>
+            <h1 class="birthday-title">Happy Birthday</h1>
+            <h2 class="name-title">To My Amazing Sister ❤️</h2>
+            <p class="birthday-message">
+                Today is all about celebrating you and the wonderful person you are. 
+                May your day be filled with joy, laughter, and all the things that make you smile.
+            </p>
+        </header>
+
+        <!-- Countdown Section -->
+        <section class="countdown-section">
+            <h2 class="section-title">Countdown to Your Birthday</h2>
+            <div class="countdown-container" id="countdown-container">
+                <div class="countdown-box">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <h2 class="section-title">Special Moments</h2>
+            <div class="gallery-container">
+                <div class="main-image-container">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Birthday Celebration" class="main-image" id="main-image">
+                </div>
+                
+                <div class="gallery-controls">
+                    <button class="nav-btn" id="prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="nav-btn" id="next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="thumbnails-container" id="thumbnails-container">
+                    <!-- Thumbnails will be generated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+
+        <section class="cake-section">
+            <h2 class="section-title">Make a Wish!</h2>
+            <div class="cake-container">
+                <div class="cake" id="birthday-cake">
+                    <div class="candle"></div>
+                    <div class="candle"></div>
+                    <div class="candle"></div>
+                    <div class="flame"></div>
+                    <div class="flame"></div>
+                    <div class="flame"></div>
+                </div>
+            </div>
+            <button class="blow-btn" id="blow-btn">Blow Out Candles</button>
+        </section>
+
+        <section class="secret-section">
+            <div class="heart-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <p class="secret-message">
+                Seeing you smile makes my day brighter. Your kindness, laughter, and beautiful spirit 
+                have made a lasting impression. Wishing you the most wonderful birthday filled with 
+                everything that brings you happiness.
+            </p>
+        </section>
+
+        <footer>
+        <a class="linker" href="https://hbdwish.gourav.sh/Fauziyah/2">Click Here</a>
+        </footer>
+    </div>
+
+    <!-- Audio for background music -->
+    <audio id="background-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preloader
+            setTimeout(function() {
+                document.getElementById('preloader').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('preloader').style.display = 'none';
+                    document.getElementById('password-screen').style.display = 'flex';
+                }, 800);
+            }, 2500);
+
+
+            
+
+            // Initialize Particles.js
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#ffb6c1"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#ffb6c1",
+                        "opacity": 0.3,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // Password handling
+            const passwordScreen = document.getElementById('password-screen');
+            const passwordInput = document.getElementById('password-input');
+            const submitBtn = document.getElementById('submit-btn');
+            const errorMessage = document.getElementById('error-message');
+            const mainContent = document.getElementById('main-content');
+            const backgroundMusic = document.getElementById('background-music');
+            
+            // Set the correct password (DDMM format)
+            const correctPassword = "2408"; // Change to her actual birth date
+            
+            submitBtn.addEventListener('click', checkPassword);
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+            
+            function checkPassword() {
+                const enteredPassword = passwordInput.value;
+                
+                if (enteredPassword === correctPassword) {
+                    // Hide password screen
+                    passwordScreen.style.opacity = '0';
+                    passwordScreen.style.visibility = 'hidden';
+                    
+                    // Show main content
+                    mainContent.style.display = 'block';
+                    setTimeout(() => {
+                        mainContent.style.opacity = '1';
+                    }, 100);
+                    
+                    // Play background music
+                    backgroundMusic.volume = 0.4;
+                    backgroundMusic.play().catch(e => {
+                        console.log("Autoplay prevented. User interaction required.");
+                    });
+                    
+                    // Trigger confetti celebration
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 150,
+                            spread: 70,
+                            origin: { y: 0.6 }
+                        });
+                    }, 1500);
+                    
+                    // Show message box after delay
+                    setTimeout(() => {
+                        document.getElementById('message-box').classList.add('show');
+                    }, 3000);
+                    
+                } else {
+                    errorMessage.textContent = "That's not quite right. Try again!";
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    
+                    // Shake animation for error
+                    passwordInput.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        passwordInput.style.animation = '';
+                    }, 500);
+                }
+            }
+            
+            // Create keyframes for shake animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    20%, 60% { transform: translateX(-5px); }
+                    40%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Image Gallery
+            const images = [
+                {
+                    main: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    thumb: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    main: "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    thumb: "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    main: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    thumb: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    main: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    thumb: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                },
+                {
+                    main: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+                    thumb: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                }
+            ];
+
+            const mainImage = document.getElementById('main-image');
+            const thumbnailsContainer = document.getElementById('thumbnails-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            let currentImageIndex = 0;
+
+            // Create thumbnails
+            images.forEach((image, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'thumbnail';
+                if (index === 0) thumbnail.classList.add('active');
+                
+                const img = document.createElement('img');
+                img.src = image.thumb;
+                img.alt = `Thumbnail ${index + 1}`;
+                
+                thumbnail.appendChild(img);
+                thumbnail.addEventListener('click', () => {
+                    setActiveImage(index);
+                });
+                
+                thumbnailsContainer.appendChild(thumbnail);
+            });
+
+            // Navigation buttons
+            prevBtn.addEventListener('click', () => {
+                const newIndex = (currentImageIndex - 1 + images.length) % images.length;
+                setActiveImage(newIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const newIndex = (currentImageIndex + 1) % images.length;
+                setActiveImage(newIndex);
+            });
+
+            // Auto-rotate images
+            setInterval(() => {
+                const newIndex = (currentImageIndex + 1) % images.length;
+                setActiveImage(newIndex);
+            }, 5000);
+
+            function setActiveImage(index) {
+                currentImageIndex = index;
+                mainImage.src = images[index].main;
+                
+                // Update active thumbnail
+                document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+                    if (i === index) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+            }
+
+            // Floating hearts animation
+            function createHearts() {
+                const heartCount = 15;
+                
+                for (let i = 0; i < heartCount; i++) {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '👍           💕';
+                    heart.style.position = 'fixed';
+                    heart.style.fontSize = Math.random() * 10 + 5 + 'px';
+                    heart.style.left = Math.random() * 70 + 'vw';
+                    heart.style.top = '105vh';
+                    heart.style.opacity = Math.random() * 0.3 + 0.3;
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '0';
+                    heart.style.animation = `floatHeart ${Math.random() * 5 + 4}s linear infinite`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    // Remove heart after animation completes
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 10000);
+                }
+                
+                // Add keyframes for animation
+                const heartStyle = document.createElement('style');
+                heartStyle.textContent = `
+                    @keyframes floatHeart {
+                        0% {
+                            transform: translateY(0) rotate(0deg);
+                            opacity: ${Math.random() * 0.5 + 0.5};
+                        }
+                        100% {
+                            transform: translateY(-100vh) rotate(${Math.random() * 360}deg);
+                            opacity: 0;
+                        }
+                    }
+                `;
+                document.head.appendChild(heartStyle);
+            }
+            
+            // Create hearts periodically
+            setInterval(createHearts, 1000);
+            createHearts();
+
+            // Interactive cake
+            const blowBtn = document.getElementById('blow-btn');
+            const flames = document.querySelectorAll('.flame');
+            
+            blowBtn.addEventListener('click', function() {
+                // Hide flames
+                flames.forEach(flame => {
+                    flame.style.animation = 'none';
+                    flame.style.opacity = '0';
+                    flame.style.transform = 'scale(0)';
+                });
+                
+                // Create smoke effect
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 30,
+                            spread: 70,
+                            origin: { y: 0.4 },
+                            colors: ['#ffffff', '#cccccc', '#aaaaaa'],
+                            shapes: ['circle']
+                        });
+                    }, i * 200);
+                }
+                
+                // Show wish message
+                setTimeout(() => {
+                    alert("Your wish has been sent to the universe! ✨");
+                }, 1000);
+                
+                // Disable button after blowing
+                this.disabled = true;
+                this.textContent = "Wish Granted!";
+                this.style.background = "#4CAF50";
+            });
+
+            // Birthday Countdown (July 26)
+            function updateCountdown() {
+                const now = new Date();
+                const currentYear = now.getFullYear();
+                const birthday = new Date(currentYear, 6, 26); // July is month 6 (0-indexed)
+                
+                // If birthday has passed this year, set to next year
+                if (now > birthday) {
+                    birthday.setFullYear(currentYear + 1);
+                }
+                
+                const diff = birthday - now;
+                
+                // Calculate time units
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                // Update display
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            // Initialize and update countdown every second
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // Message box functionality
+            const messageBox = document.getElementById('message-box');
+            const closeBtn = document.getElementById('close-btn');
+            
+            messageBox.addEventListener('click', function() {
+                this.querySelector('.message-title').textContent = "Special Birthday Wish";
+                this.querySelector('.message-content').innerHTML = 
+                    "I hope your birthday is as beautiful and special as you are! Every moment with you is precious. ❤️";
+                
+                // Add confetti when message is revealed
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            });
+            
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent triggering the message box click
+                messageBox.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
