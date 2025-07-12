@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday ❤️</title>
+    <!-- Favicon -->
+    <link rel="icon" href="path/to/your/favicon.png" type="image/png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1"></script>
     <style>
+        :root {
+            --primary-bg-gradient: linear-gradient(135deg, #1a1a2e, #16213e); /* Reverted to dark background */
+            --glass-bg: rgba(255, 255, 255, 0.05); /* Reverted to darker glass background */
+            --glass-border: rgba(255, 255, 255, 0.1); /* Reverted to darker glass border */
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to darker shadow */
+            --primary-text-color: #fff; /* Reverted to white text */
+            --secondary-text-color: #e0e0ff; /* Reverted to lighter grey text */
+            --accent-pink: #ffb6c1; /* Reverted to original accent pink */
+            --accent-blue: #ff7e5f; /* Reverted to original accent orange/red */
+            --error-color: #ff6b6b; /* Reverted to original error color */
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -17,8 +32,8 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #fff;
+            background: var(--primary-bg-gradient);
+            color: var(--primary-text-color);
             overflow-x: hidden;
             min-height: 100vh;
         }
@@ -30,13 +45,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted preloader background */
+            backdrop-filter: blur(10px);
+            border: none; /* Reverted to no border */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             z-index: 9999;
             transition: opacity 0.8s ease-out;
+            box-shadow: none; /* Reverted to no shadow */
         }
 
         .loader {
@@ -50,7 +68,7 @@
             height: 100%;
             border: 5px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            border-top-color: #fff;
+            border-top-color: #fff; /* Reverted to white */
             animation: spin 1.5s linear infinite;
         }
 
@@ -62,7 +80,7 @@
             left: 15%;
             border: 3px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
-            border-top-color: #fff;
+            border-top-color: #fff; /* Reverted to white */
             animation: spin 1s linear infinite reverse;
         }
 
@@ -70,8 +88,8 @@
             margin-top: 30px;
             font-size: 24px;
             font-weight: 600;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            color: #fff; /* Reverted to white */
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Reverted to darker shadow */
             letter-spacing: 2px;
         }
 
@@ -86,7 +104,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 20, 0.95);
+            background: rgba(10, 10, 20, 0.95); /* Reverted to dark overlay */
+            backdrop-filter: blur(5px);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -97,7 +116,7 @@
 
         .lock-icon {
             font-size: 5rem;
-            color: #ff7e5f;
+            color: var(--accent-blue); /* Accent color */
             margin-bottom: 30px;
             animation: pulse 2s infinite;
         }
@@ -109,27 +128,28 @@
         }
 
         .password-container {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1); /* Reverted to original glass background */
             padding: 40px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
             text-align: center;
             max-width: 500px;
             width: 90%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to original shadow */
+            border: none; /* Reverted to no border */
         }
 
         .password-title {
             font-size: 2.2rem;
             margin-bottom: 10px;
             font-weight: 600;
-            color: #ffb6c1;
+            color: var(--accent-pink); /* Accent color */
         }
 
         .password-subtitle {
             font-size: 1.1rem;
             margin-bottom: 30px;
-            color: #ccc;
+            color: #ccc; /* Reverted to original color */
         }
 
         .password-form {
@@ -141,27 +161,28 @@
         .password-input {
             padding: 15px 20px;
             font-size: 1.1rem;
-            border: none;
+            border: none; /* Reverted to no border */
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
+            background: rgba(255, 255, 255, 0.15); /* Reverted to original input background */
+            color: white; /* Reverted to white text */
             text-align: center;
             outline: none;
             transition: background 0.3s;
         }
 
         .password-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.6); /* Reverted to original placeholder color */
         }
 
         .password-input:focus {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.25); /* Reverted to original focus background */
+            border-color: none; /* Reverted to no border color */
         }
 
         .submit-btn {
             padding: 15px;
             font-size: 1.1rem;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted to original button gradient */
             color: white;
             border: none;
             border-radius: 50px;
@@ -172,11 +193,12 @@
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4); /* Reverted to original shadow */
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted to original hover background */
         }
 
         .error-message {
-            color: #ff6b6b;
+            color: var(--error-color);
             margin-top: 10px;
             height: 20px;
             font-size: 0.9rem;
@@ -209,8 +231,8 @@
         .birthday-title {
             font-family: 'Dancing Script', cursive;
             font-size: 4.5rem;
-            color: #ffb6c1;
-            text-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+            color: var(--accent-pink); /* Accent color */
+            text-shadow: 0 0 15px rgba(255, 182, 193, 0.6); /* Reverted to original shadow */
             margin-bottom: 10px;
             animation: float 3s ease-in-out infinite;
         }
@@ -223,7 +245,7 @@
         .name-title {
             font-size: 2.5rem;
             font-weight: 600;
-            color: #fff;
+            color: #fff; /* Reverted to white */
             margin-bottom: 20px;
         }
 
@@ -232,12 +254,14 @@
             margin: 0 auto 30px;
             font-size: 1.2rem;
             line-height: 1.8;
-            color: #e0e0ff;
+            color: #e0e0ff; /* Reverted to original color */
         }
 
         /* Countdown Section */
         .countdown-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.05); /* Reverted to original glass background */
+            backdrop-filter: blur(10px);
+            border: none; /* Reverted to no border */
             max-width: 800px;
             margin: 40px auto;
             padding: 30px;
@@ -245,13 +269,13 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to original shadow */
         }
 
         .countdown-title {
             font-size: 1.8rem;
             margin-bottom: 25px;
-            color: #ffb6c1;
+            color: var(--accent-pink); /* Accent color */
         }
 
         .countdown-container {
@@ -264,7 +288,7 @@
         .countdown-box {
             width: 120px;
             height: 120px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1); /* Reverted to original glass background */
             border-radius: 15px;
             display: flex;
             flex-direction: column;
@@ -272,18 +296,19 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            border: none; /* Reverted to no border */
         }
 
         .countdown-value {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #ffb6c1;
-            text-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+            color: var(--accent-pink); /* Accent color */
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.5); /* Reverted to original shadow */
         }
 
         .countdown-label {
             font-size: 0.9rem;
-            color: #ccc;
+            color: #ccc; /* Reverted to original color */
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 5px;
@@ -300,8 +325,16 @@
             text-align: center;
             font-size: 2.2rem;
             margin-bottom: 30px;
-            color: #ffb6c1;
+            color: var(--accent-pink); /* Accent color */
             position: relative;
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(20px); /* Initial state for animation */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .section-title.animate-in { /* Class added by JS for animation */
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title:after {
@@ -309,7 +342,7 @@
             display: block;
             width: 80px;
             height: 3px;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Reverted to original gradient */
             margin: 10px auto;
             border-radius: 3px;
         }
@@ -322,22 +355,49 @@
 
         .main-image-container {
             position: relative;
-            height: 500px;
+            width: 100%; /* Ensure it takes full width */
+            height: 0; /* Set height to 0 to use padding-bottom for aspect ratio */
+            padding-bottom: 41.66%; /* Aspect ratio: (1 / 2.4) * 100% = 41.66% */
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); /* Reverted to original shadow */
+            border: none; /* Reverted to no border */
+            background-color: rgba(0, 0, 0, 0.1); /* Background for letterboxing */
         }
 
         .main-image {
+            position: absolute; /* Position absolutely within the container */
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            transition: transform 0.5s ease;
+            object-fit: contain; /* Kept 'contain' for no wobbling */
+            transition: transform 0.5s ease, opacity 0.5s ease;
         }
 
         .main-image:hover {
             transform: scale(1.03);
         }
+
+        .image-caption {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6); /* Reverted to original background */
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            max-width: 90%;
+            text-align: center;
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.5s ease-in-out;
+        }
+        .main-image-container:hover .image-caption {
+            opacity: 1; /* Show on hover */
+        }
+
 
         .gallery-controls {
             display: flex;
@@ -347,9 +407,9 @@
         }
 
         .nav-btn {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: none;
+            background: rgba(255, 255, 255, 0.15); /* Reverted to original background */
+            color: white; /* Reverted to white */
+            border: none; /* Reverted to no border */
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -359,11 +419,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: none; /* Reverted to no shadow */
         }
 
         .nav-btn:hover {
-            background: rgba(255, 182, 193, 0.3);
+            background: rgba(255, 182, 193, 0.3); /* Reverted to original hover background */
             transform: translateY(-3px);
+            border-color: none; /* Reverted to no border color */
+            color: white; /* Reverted to white */
         }
 
         .thumbnails-container {
@@ -383,23 +446,27 @@
             opacity: 0.7;
             transition: all 0.3s;
             border: 2px solid transparent;
+            box-shadow: none; /* Reverted to no shadow */
         }
 
         .thumbnail:hover, .thumbnail.active {
             opacity: 1;
             transform: translateY(-5px);
-            border-color: #ffb6c1;
+            border-color: var(--accent-pink); /* Accent color for active thumbnail */
+            box-shadow: none; /* Reverted to no shadow */
         }
 
         .thumbnail img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Keep thumbnails as cover to fill their square space */
         }
 
         /* Secret Message */
         .secret-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.05); /* Reverted to original glass background */
+            backdrop-filter: blur(10px);
+            border: none; /* Reverted to no border */
             margin: 40px auto;
             padding: 60px 20px;
             text-align: center;
@@ -407,6 +474,7 @@
             border-radius: 20px;
             position: relative;
             overflow: hidden;
+            box-shadow: none; /* Reverted to no shadow */
         }
 
         .secret-section:before {
@@ -416,12 +484,12 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Reverted to original gradient */
         }
 
         .heart-icon {
             font-size: 3rem;
-            color: #ff6b6b;
+            color: #ff6b6b; /* Reverted to original color */
             margin-bottom: 25px;
             animation: heartbeat 1.5s infinite;
         }
@@ -437,7 +505,7 @@
         .secret-message {
             font-size: 1.4rem;
             line-height: 1.8;
-            color: #e0e0ff;
+            color: #e0e0ff; /* Reverted to original color */
             max-width: 600px;
             margin: 0 auto;
             font-style: italic;
@@ -449,7 +517,7 @@
         .secret-message:after {
             content: '"';
             font-size: 3rem;
-            color: rgba(255, 182, 193, 0.5);
+            color: rgba(255, 182, 193, 0.5); /* Reverted to original color */
             position: absolute;
         }
 
@@ -464,7 +532,6 @@
         }
 
       
-
         /* Interactive Cake */
         .cake-section {
             max-width: 800px;
@@ -486,7 +553,7 @@
             transform: translateX(-50%);
             width: 250px;
             height: 150px;
-            background: linear-gradient(to bottom, #ffb6c1, #ff7e5f);
+            background: linear-gradient(to bottom, #ffb6c1, #ff7e5f); /* Reverted to original cake colors */
             border-radius: 50% 50% 0 0;
             cursor: pointer;
             transition: transform 0.3s;
@@ -513,7 +580,7 @@
             position: absolute;
             width: 15px;
             height: 30px;
-            background: linear-gradient(to top, #ffd700, #ff7e5f);
+            background: linear-gradient(to top, #ffd700, #ff7e5f); /* Keep warm flame colors */
             border-radius: 50% 50% 20% 20%;
             top: -90px;
             animation: flicker 1.5s infinite alternate;
@@ -531,20 +598,21 @@
 
         .blow-btn {
             padding: 12px 30px;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted to original button gradient */
             color: white;
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             font-weight: 600;
             margin-top: 30px;
         }
 
         .blow-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4); /* Reverted to original shadow */
+            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted to original hover background */
         }
 
         /* Message Box */
@@ -554,12 +622,13 @@
             left: 50%;
             transform: translateX(-50%);
             width: 300px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.15); /* Reverted to original glass background */
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to original shadow */
+            border: none; /* Reverted to no border */
             z-index: 100;
             cursor: pointer;
             transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -579,13 +648,13 @@
 
         .message-title {
             font-size: 1.2rem;
-            color: #ffb6c1;
+            color: var(--accent-pink); /* Accent color */
             margin-bottom: 10px;
         }
 
         .message-content {
             font-size: 1rem;
-            color: #e0e0ff;
+            color: #e0e0ff; /* Reverted to original color */
             line-height: 1.5;
         }
 
@@ -595,40 +664,114 @@
             right: 10px;
             width: 25px;
             height: 25px;
-            background: rgba(255, 182, 193, 0.3);
-            color: white;
+            background: rgba(255, 182, 193, 0.3); /* Reverted to original background */
+            color: white; /* Reverted to white */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
             cursor: pointer;
+            border: none; /* Reverted to no border */
         }
+
+        /* Guestbook Section */
+        .guestbook-section {
+            background: rgba(255, 255, 255, 0.05); /* Reverted to original glass background */
+            backdrop-filter: blur(10px);
+            border: none; /* Reverted to no border */
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to original shadow */
+        }
+
+        .guestbook-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .guestbook-form .password-input { /* Reusing password-input style */
+            width: 100%;
+            text-align: left; /* Align text left for input */
+            background: rgba(255, 255, 255, 0.15); /* Reverted to original input background */
+            color: white; /* Reverted to white */
+            border: none; /* Reverted to no border */
+        }
+        .guestbook-form .password-input::placeholder {
+            color: rgba(255, 255, 255, 0.6); /* Reverted to original placeholder color */
+        }
+
+        .guestbook-form textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .wish-list-container {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px; /* For scrollbar */
+            text-align: left;
+        }
+
+        .wish-item {
+            background: rgba(255, 255, 255, 0.1); /* Reverted to original glass background */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Reverted to original shadow */
+            border: none; /* Reverted to no border */
+        }
+
+        .wish-text {
+            font-size: 1rem;
+            color: #e0e0ff; /* Reverted to original color */
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+
+        .wish-author {
+            font-size: 0.85rem;
+            color: var(--accent-pink); /* Accent color */
+            font-style: italic;
+            text-align: right;
+        }
+
 
         /* Footer */
         footer {
             text-align: center;
             padding: 30px 20px;
-            color: #aaa;
+            color: #aaa; /* Reverted to original color */
             font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Reverted to original border */
         }
 
         .footer-heart {
-            color: #ff6b6b;
+            color: #ff6b6b; /* Reverted to original color */
             margin: 0 5px;
         }
 
         .linker{
-          background-color: #ff6b6b;  
+          background-color: #ff6b6b; /* Reverted to original background */  
           color: white;
           text-decoration: none;
           padding: 2.65%;
           margin: 10px;
           border-radius: 50px;
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .linker:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4); /* Reverted to original shadow */
+            background-color: #ff6b6b; /* Reverted to original hover background */
         }
 
-        /* Responsive Design */
+        /* Responsive Design (Heights are now managed by aspect ratio) */
         @media (max-width: 768px) {
             .birthday-title {
                 font-size: 3.5rem;
@@ -638,9 +781,7 @@
                 font-size: 2rem;
             }
             
-            .main-image-container {
-                height: 350px;
-            }
+            /* main-image-container height is now controlled by padding-bottom */
             
             .password-title {
                 font-size: 1.8rem;
@@ -670,9 +811,7 @@
                 font-size: 1.7rem;
             }
             
-            .main-image-container {
-                height: 280px;
-            }
+            /* main-image-container height is now controlled by padding-bottom */
             
             .password-container {
                 padding: 30px 20px;
@@ -783,6 +922,7 @@
             <div class="gallery-container">
                 <div class="main-image-container">
                     <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Birthday Celebration" class="main-image" id="main-image">
+                    <div class="image-caption" id="image-caption"></div>
                 </div>
                 
                 <div class="gallery-controls">
@@ -827,6 +967,19 @@
             </p>
         </section>
 
+        <!-- Guestbook Section -->
+        <section class="guestbook-section">
+            <h2 class="section-title">Leave a Birthday Wish!</h2>
+            <div class="guestbook-form">
+                <input type="text" id="guestbook-name" placeholder="Your Name" class="password-input">
+                <textarea id="guestbook-message" placeholder="Your Birthday Wish" class="password-input" rows="3"></textarea>
+                <button id="submit-wish" class="submit-btn">Post Wish</button>
+            </div>
+            <div class="wish-list-container" id="wish-list-container">
+                <!-- Wishes will be appended here by JavaScript -->
+            </div>
+        </section>
+
         <footer>
         <a class="linker" href="https://hbdwish.gourav.sh/Fauziyah/2">Click Here</a>
         </footer>
@@ -848,9 +1001,6 @@
                 }, 800);
             }, 2500);
 
-
-            
-
             // Initialize Particles.js
             particlesJS('particles-js', {
                 "particles": {
@@ -862,7 +1012,7 @@
                         }
                     },
                     "color": {
-                        "value": "#ffb6c1"
+                        "value": "#ffb6c1" // Reverted to original particle color
                     },
                     "shape": {
                         "type": "circle",
@@ -894,7 +1044,7 @@
                     "line_linked": {
                         "enable": true,
                         "distance": 150,
-                        "color": "#ffb6c1",
+                        "color": "#ffb6c1", // Reverted to original line color
                         "opacity": 0.3,
                         "width": 1
                     },
@@ -974,12 +1124,14 @@
                         console.log("Autoplay prevented. User interaction required.");
                     });
                     
-                    // Trigger confetti celebration
+                    // Trigger confetti celebration with diverse shapes/colors
                     setTimeout(() => {
                         confetti({
                             particleCount: 150,
                             spread: 70,
-                            origin: { y: 0.6 }
+                            origin: { y: 0.6 },
+                            shapes: ['circle', 'square', 'star'], // Added shapes
+                            colors: ['#ffb6c1', '#ff7e5f', '#feb47b', '#ffffff', '#e0e0ff'] // Reverted to original colors
                         });
                     }, 1500);
                     
@@ -1012,31 +1164,37 @@
             `;
             document.head.appendChild(style);
 
-            // Image Gallery
+            // Image Gallery with Captions
             const images = [
                 {
                     main: "https://i.postimg.cc/d1V1LSNd/5994820480680442811.jpg",
-                    thumb: "https://i.postimg.cc/d1V1LSNd/5994820480680442811.jpg"
+                    thumb: "https://i.postimg.cc/d1V1LSNd/5994820480680442811.jpg",
+                    caption: "Our first adventure together! So many laughs."
                 },
                 {
                     main: "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    thumb: "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                    thumb: "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+                    caption: "Remember this fun day at the park? Pure joy!"
                 },
                 {
                     main: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    thumb: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                    thumb: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+                    caption: "Always shining bright, no matter what."
                 },
                 {
                     main: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    thumb: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                    thumb: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+                    caption: "A candid moment, capturing your beautiful spirit."
                 },
                 {
                     main: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    thumb: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+                    thumb: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
+                    caption: "Through thick and thin, always by my side."
                 }
             ];
 
             const mainImage = document.getElementById('main-image');
+            const imageCaption = document.getElementById('image-caption'); // New element
             const thumbnailsContainer = document.getElementById('thumbnails-container');
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
@@ -1079,8 +1237,14 @@
 
             function setActiveImage(index) {
                 currentImageIndex = index;
-                mainImage.src = images[index].main;
-                
+                mainImage.style.opacity = 0; // Fade out current image
+                setTimeout(() => {
+                    mainImage.src = images[index].main;
+                    imageCaption.textContent = images[index].caption; // Update caption
+                    imageCaption.style.opacity = 1; // Make caption visible
+                    mainImage.style.opacity = 1; // Fade in new image
+                }, 500); // Match this with the CSS transition duration
+
                 // Update active thumbnail
                 document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
                     if (i === index) {
@@ -1090,6 +1254,9 @@
                     }
                 });
             }
+            // Initialize first image caption
+            setActiveImage(0);
+
 
             // Floating hearts animation
             function createHearts() {
@@ -1097,12 +1264,13 @@
                 
                 for (let i = 0; i < heartCount; i++) {
                     const heart = document.createElement('div');
-                    heart.innerHTML = '👍           💕';
+                    heart.innerHTML = '💕'; // Changed to single heart emoji
                     heart.style.position = 'fixed';
-                    heart.style.fontSize = Math.random() * 10 + 5 + 'px';
-                    heart.style.left = Math.random() * 70 + 'vw';
+                    heart.style.fontSize = Math.random() * 10 + 15 + 'px'; // Slightly larger
+                    heart.style.left = Math.random() * 90 + 'vw'; // Wider spread
                     heart.style.top = '105vh';
-                    heart.style.opacity = Math.random() * 0.3 + 0.3;
+                    heart.style.opacity = Math.random() * 0.3 + 0.5; // More opaque
+                    heart.style.color = `#ff6b6b`; // Reverted to original heart color
                     heart.style.pointerEvents = 'none';
                     heart.style.zIndex = '0';
                     heart.style.animation = `floatHeart ${Math.random() * 5 + 4}s linear infinite`;
@@ -1148,29 +1316,62 @@
                     flame.style.transform = 'scale(0)';
                 });
                 
-                // Create smoke effect
+                // Create smoke effect with diverse confetti
                 for (let i = 0; i < 3; i++) {
                     setTimeout(() => {
                         confetti({
                             particleCount: 30,
                             spread: 70,
                             origin: { y: 0.4 },
-                            colors: ['#ffffff', '#cccccc', '#aaaaaa'],
-                            shapes: ['circle']
+                            colors: ['#ffffff', '#cccccc', '#aaaaaa', '#f0f0f0'], // Smoke colors
+                            shapes: ['circle', 'square'] // Added shapes
                         });
                     }, i * 200);
                 }
                 
-                // Show wish message
-                setTimeout(() => {
-                    alert("Your wish has been sent to the universe! ✨");
-                }, 1000);
+                // Show wish message (using custom modal instead of alert)
+                showCustomMessage("Your wish has been sent to the universe! ✨");
                 
                 // Disable button after blowing
                 this.disabled = true;
                 this.textContent = "Wish Granted!";
-                this.style.background = "#4CAF50";
+                this.style.background = "linear-gradient(45deg, #ff7e5f, #feb47b)"; // Reverted to original button gradient
             });
+
+            // Custom Message Box (replacement for alert)
+            function showCustomMessage(message) {
+                const customMessageBox = document.createElement('div');
+                customMessageBox.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0, 0, 0, 0.8);
+                    color: white;
+                    padding: 20px 30px;
+                    border-radius: 10px;
+                    z-index: 10000;
+                    font-size: 1.2rem;
+                    text-align: center;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+                    animation: fadeIn 0.5s ease-out;
+                `;
+                customMessageBox.textContent = message;
+                document.body.appendChild(customMessageBox);
+
+                setTimeout(() => {
+                    customMessageBox.style.animation = 'fadeOut 0.5s ease-in forwards';
+                    setTimeout(() => customMessageBox.remove(), 500);
+                }, 3000); // Message visible for 3 seconds
+
+                const fadeStyle = document.createElement('style');
+                fadeStyle.textContent = `
+                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+                `;
+                document.head.appendChild(fadeStyle);
+            }
+
 
             // Birthday Countdown (July 26)
             function updateCountdown() {
@@ -1211,17 +1412,65 @@
                 this.querySelector('.message-content').innerHTML = 
                     "I hope your birthday is as beautiful and special as you are! Every moment with you is precious. ❤️";
                 
-                // Add confetti when message is revealed
+                // Add confetti when message is revealed with diverse shapes/colors
                 confetti({
                     particleCount: 100,
                     spread: 70,
-                    origin: { y: 0.6 }
+                    origin: { y: 0.6 },
+                    shapes: ['circle', 'star', 'square'], // Added shapes
+                    colors: ['#ffb6c1', '#ff7e5f', '#feb47b', '#ffffff', '#e0e0ff'] // Reverted to original colors
                 });
             });
             
             closeBtn.addEventListener('click', function(e) {
                 e.stopPropagation(); // Prevent triggering the message box click
                 messageBox.classList.remove('show');
+            });
+
+            // Virtual Guestbook/Wish Wall functionality
+            const submitWishBtn = document.getElementById('submit-wish');
+            const guestbookNameInput = document.getElementById('guestbook-name');
+            const guestbookMessageInput = document.getElementById('guestbook-message');
+            const wishListContainer = document.getElementById('wish-list-container');
+
+            submitWishBtn.addEventListener('click', () => {
+                const name = guestbookNameInput.value.trim();
+                const message = guestbookMessageInput.value.trim();
+
+                if (name && message) {
+                    const wishItem = document.createElement('div');
+                    wishItem.classList.add('wish-item');
+                    wishItem.innerHTML = `
+                        <p class="wish-text">${message}</p>
+                        <p class="wish-author">- ${name}</p>
+                    `;
+                    wishListContainer.prepend(wishItem); // Add new wishes at the top
+                    guestbookNameInput.value = '';
+                    guestbookMessageInput.value = '';
+                } else {
+                    showCustomMessage("Please enter both your name and a message!");
+                }
+            });
+
+            // Intersection Observer for animated section titles
+            const sectionTitles = document.querySelectorAll('.section-title');
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.5 // Trigger when 50% of element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
+            sectionTitles.forEach(title => {
+                observer.observe(title);
             });
         });
     </script>
