@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday ❤️</title>
-    <!-- Favicon -->
     <link rel="icon" href="path/to/your/favicon.png" type="image/png">
     
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -15,86 +14,87 @@
         :root {
             --primary-bg-gradient: linear-gradient(135deg, #1a1a2e, #16213e); /* Reverted to dark background */
             --glass-bg: rgba(255, 255, 255, 0.05); /* Reverted to darker glass background */
-            --glass-border: rgba(255, 255, 255, 0.1); /* Reverted to darker glass border */
-            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to darker shadow */
-            --primary-text-color: #fff; /* Reverted to white text */
-            --secondary-text-color: #e0e0ff; /* Reverted to lighter grey text */
-            --accent-pink: #ffb6c1; /* Reverted to original accent pink */
-            --accent-blue: #ff7e5f; /* Reverted to original accent orange/red */
-            --error-color: #ff6b6b; /* Reverted to original error color */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-color: #f0f0f0; /* Light text for dark background */
+            --accent-pink: #ffb6c1; /* Light pink */
+            --button-gradient: linear-gradient(45deg, #ff7e5f, #feb47b); /* Orange-pink gradient */
+            --button-hover-gradient: linear-gradient(45deg, #feb47b, #ff7e5f);
+            --input-bg: rgba(255, 255, 255, 0.1);
+            --input-border: rgba(255, 255, 255, 0.2);
+            --box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Base Styles */
         body {
+            margin: 0;
             font-family: 'Poppins', sans-serif;
             background: var(--primary-bg-gradient);
-            color: var(--primary-text-color);
-            overflow-x: hidden;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
+            flex-direction: column;
+            position: relative; /* For particle.js */
         }
 
-        /* Preloader Styles */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Behind all content */
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 90%;
+            margin: 20px auto;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            box-sizing: border-box;
+            opacity: 0; /* Hidden by default, shown after password */
+            transition: opacity 1s ease-in-out;
+        }
+
+        /* Preloader */
         #preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted preloader background */
-            backdrop-filter: blur(10px);
-            border: none; /* Reverted to no border */
+            background: var(--primary-bg-gradient);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             z-index: 9999;
-            transition: opacity 0.8s ease-out;
-            box-shadow: none; /* Reverted to no shadow */
+            color: var(--accent-pink);
+            font-size: 1.5rem;
+            text-align: center;
         }
 
         .loader {
-            width: 100px;
-            height: 100px;
-            position: relative;
-        }
-
-        .loader-inner {
-            width: 100%;
-            height: 100%;
-            border: 5px solid rgba(255, 255, 255, 0.3);
+            border: 8px solid rgba(255, 255, 255, 0.2);
+            border-top: 8px solid var(--accent-pink);
             border-radius: 50%;
-            border-top-color: #fff; /* Reverted to white */
-            animation: spin 1.5s linear infinite;
-        }
-
-        .loader-circle {
-            position: absolute;
-            width: 70%;
-            height: 70%;
-            top: 15%;
-            left: 15%;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            border-top-color: #fff; /* Reverted to white */
-            animation: spin 1s linear infinite reverse;
-        }
-
-        .loader-text {
-            margin-top: 30px;
-            font-size: 24px;
-            font-weight: 600;
-            color: #fff; /* Reverted to white */
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Reverted to darker shadow */
-            letter-spacing: 2px;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Password Screen */
@@ -104,214 +104,270 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 10, 20, 0.95); /* Reverted to dark overlay */
-            backdrop-filter: blur(5px);
+            background: var(--primary-bg-gradient);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            transition: opacity 0.5s, visibility 0.5s;
+            z-index: 9998;
+            color: var(--text-color);
         }
 
-        .lock-icon {
-            font-size: 5rem;
-            color: var(--accent-blue); /* Accent color */
-            margin-bottom: 30px;
-            animation: pulse 2s infinite;
+        .password-container {
+            background: var(--glass-bg);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+
+        .password-container i.fa-lock {
+            font-size: 3rem;
+            color: var(--accent-pink);
+            margin-bottom: 20px;
+            animation: pulse 1.5s infinite alternate;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
-        .password-container {
-            background: rgba(255, 255, 255, 0.1); /* Reverted to original glass background */
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to original shadow */
-            border: none; /* Reverted to no border */
+        .password-container h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-pink);
         }
 
-        .password-title {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--accent-pink); /* Accent color */
+        .password-container p {
+            font-size: 1rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
         }
 
-        .password-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            color: #ccc; /* Reverted to original color */
-        }
-
-        .password-form {
+        .password-input-group {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            align-items: center;
+            gap: 15px;
         }
 
-        .password-input {
-            padding: 15px 20px;
-            font-size: 1.1rem;
-            border: none; /* Reverted to no border */
-            border-radius: 50px;
-            background: rgba(255, 255, 255, 0.15); /* Reverted to original input background */
-            color: white; /* Reverted to white text */
-            text-align: center;
+        .password-input-group input {
+            width: calc(100% - 40px);
+            padding: 12px 20px;
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
             outline: none;
-            transition: background 0.3s;
+            transition: border-color 0.3s ease;
+            text-align: center;
         }
 
-        .password-input::placeholder {
-            color: rgba(255, 255, 255, 0.6); /* Reverted to original placeholder color */
+        .password-input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        .password-input:focus {
-            background: rgba(255, 255, 255, 0.25); /* Reverted to original focus background */
-            border-color: none; /* Reverted to no border color */
+        .password-input-group input:focus {
+            border-color: var(--accent-pink);
         }
 
-        .submit-btn {
-            padding: 15px;
-            font-size: 1.1rem;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted to original button gradient */
+        .password-input-group button {
+            padding: 12px 30px;
+            background: var(--button-gradient);
             color: white;
             border: none;
-            border-radius: 50px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1.1rem;
             font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4); /* Reverted to original shadow */
-            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted to original hover background */
+        .password-input-group button:hover {
+            background: var(--button-hover-gradient);
+            transform: translateY(-2px);
         }
 
-        .error-message {
-            color: var(--error-color);
-            margin-top: 10px;
-            height: 20px;
+        .password-error {
+            color: #ff4d4d;
+            margin-top: 15px;
             font-size: 0.9rem;
-        }
-
-        /* Main Content */
-        #main-content {
-            display: none;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 0.3s ease;
         }
 
-        /* Particle Background */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
+        .password-error.visible {
+            opacity: 1;
         }
 
-        /* Header Styles */
-        header {
+        /* Shake animation for input */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .password-input-group input.shake {
+            animation: shake 0.5s;
+        }
+
+        /* Message Box */
+        .message-box {
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px;
             text-align: center;
-            padding: 80px 20px 30px;
+            margin-bottom: 30px;
+            cursor: pointer;
             position: relative;
+            overflow: hidden; /* For confetti */
+            opacity: 0; /* Hidden initially */
+            transform: translateY(-20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .birthday-title {
+        .message-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .message-box h3 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4.5rem;
-            color: var(--accent-pink); /* Accent color */
-            text-shadow: 0 0 15px rgba(255, 182, 193, 0.6); /* Reverted to original shadow */
+            font-size: 1.8rem;
+            color: var(--accent-pink);
             margin-bottom: 10px;
-            animation: float 3s ease-in-out infinite;
+        }
+
+        .message-box p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            overflow: hidden;
+            max-height: 0; /* Hidden by default */
+            opacity: 0;
+        }
+        .message-box p.expanded {
+            max-height: 200px; /* Adjust as needed */
+            opacity: 1;
+        }
+
+        .message-box .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .message-box.expanded .close-btn {
+            opacity: 1;
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            position: relative; /* For float animation */
+            overflow: hidden; /* To contain floating elements */
+        }
+
+        .header-section h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--accent-pink);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block; /* To allow float animation */
+            animation: float 3s ease-in-out infinite alternate;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
         }
 
-        .name-title {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #fff; /* Reverted to white */
-            margin-bottom: 20px;
+        .header-section h2 {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
         }
 
-        .birthday-message {
+        .header-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
             max-width: 700px;
-            margin: 0 auto 30px;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #e0e0ff; /* Reverted to original color */
+            margin: 0 auto;
         }
 
         /* Countdown Section */
         .countdown-section {
-            background: rgba(255, 255, 255, 0.05); /* Reverted to original glass background */
-            backdrop-filter: blur(10px);
-            border: none; /* Reverted to no border */
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 30px;
-            border-radius: 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to original shadow */
+            margin-bottom: 50px;
+            padding: 30px;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
-        .countdown-title {
-            font-size: 1.8rem;
+        .countdown-section h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--accent-pink);
             margin-bottom: 25px;
-            color: var(--accent-pink); /* Accent color */
         }
 
-        .countdown-container {
+        #countdown {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
         }
 
-        .countdown-box {
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.1); /* Reverted to original glass background */
-            border-radius: 15px;
+        .countdown-item {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            position: relative;
-            overflow: hidden;
-            border: none; /* Reverted to no border */
+            background: rgba(255, 255, 255, 0.08); /* Slightly lighter glass */
+            border-radius: 15px;
+            padding: 20px 25px;
+            min-width: 100px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .countdown-value {
+        .countdown-item span {
             font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-pink); /* Accent color */
-            text-shadow: 0 0 10px rgba(255, 182, 193, 0.5); /* Reverted to original shadow */
+            font-weight: 600;
+            color: var(--accent-pink);
+            line-height: 1;
+            margin-bottom: 8px;
         }
 
-        .countdown-label {
+        .countdown-item p {
             font-size: 0.9rem;
-            color: #ccc; /* Reverted to original color */
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
         }
 
         /* Gallery Section */
@@ -357,7 +413,7 @@
             position: relative;
             width: 100%; /* Ensure it takes full width */
             height: 0; /* Set height to 0 to use padding-bottom for aspect ratio */
-            padding-bottom: 41.66%; /* Aspect ratio: (1 / 2.4) * 100% = 41.66% */
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (height = 9/16 * width) */
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); /* Reverted to original shadow */
@@ -388,7 +444,7 @@
             color: white;
             padding: 8px 15px;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 0.95rem; /* Base size */
             max-width: 90%;
             text-align: center;
             opacity: 0; /* Start hidden */
@@ -398,611 +454,750 @@
             opacity: 1; /* Show on hover */
         }
 
-
         .gallery-controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.15); /* Reverted to original background */
-            color: white; /* Reverted to white */
-            border: none; /* Reverted to no border */
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.2rem;
+        .gallery-btn {
+            background: var(--button-gradient);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: none; /* Reverted to no shadow */
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
         }
 
-        .nav-btn:hover {
-            background: rgba(255, 182, 193, 0.3); /* Reverted to original hover background */
-            transform: translateY(-3px);
-            border-color: none; /* Reverted to no border color */
-            color: white; /* Reverted to white */
+        .gallery-btn:hover {
+            background: var(--button-hover-gradient);
+            transform: translateY(-2px);
         }
 
-        .thumbnails-container {
+        .thumbnail-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
             flex-wrap: wrap;
-            padding: 0 10px;
+            gap: 15px;
+            margin-top: 30px;
         }
 
         .thumbnail {
             width: 80px;
             height: 80px;
-            border-radius: 10px;
-            overflow: hidden;
+            border-radius: 15px;
+            object-fit: cover;
             cursor: pointer;
-            opacity: 0.7;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            box-shadow: none; /* Reverted to no shadow */
+            border: 3px solid transparent;
+            transition: border-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .thumbnail:hover, .thumbnail.active {
-            opacity: 1;
-            transform: translateY(-5px);
-            border-color: var(--accent-pink); /* Accent color for active thumbnail */
-            box-shadow: none; /* Reverted to no shadow */
+        .thumbnail:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
         }
 
-        .thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Keep thumbnails as cover to fill their square space */
+        .thumbnail.active {
+            border-color: var(--accent-pink);
+            transform: scale(1.05);
         }
 
-        /* Secret Message */
-        .secret-section {
-            background: rgba(255, 255, 255, 0.05); /* Reverted to original glass background */
-            backdrop-filter: blur(10px);
-            border: none; /* Reverted to no border */
-            margin: 40px auto;
-            padding: 60px 20px;
+        /* Cake Section */
+        .cake-section {
             text-align: center;
-            max-width: 800px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: var(--glass-bg);
             border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: relative;
-            overflow: hidden;
-            box-shadow: none; /* Reverted to no shadow */
+            overflow: hidden; /* For confetti */
         }
 
-        .secret-section:before {
+        .cake-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            min-height: 250px; /* Ensure some height for cake */
+        }
+
+        .cake {
+            background: #f7d2a5; /* Cake base color */
+            border-radius: 50% 50% 0 0 / 100px 100px 0 0;
+            width: 100%;
+            height: 120px;
+            position: relative;
+            box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cake:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, #ff7e5f, #feb47b); /* Reverted to original gradient */
+            height: 20px;
+            background: #ffe0b3; /* Lighter top */
+            border-radius: 50% 50% 0 0 / 10px 10px 0 0;
+            z-index: 1;
         }
 
-        .heart-icon {
-            font-size: 3rem;
-            color: #ff6b6b; /* Reverted to original color */
-            margin-bottom: 25px;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.2); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.2); }
-            70% { transform: scale(1); }
-        }
-
-        .secret-message {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            color: #e0e0ff; /* Reverted to original color */
-            max-width: 600px;
-            margin: 0 auto;
-            font-style: italic;
-            position: relative;
-            padding: 20px;
-        }
-
-        .secret-message:before,
-        .secret-message:after {
-            content: '"';
-            font-size: 3rem;
-            color: rgba(255, 182, 193, 0.5); /* Reverted to original color */
+        .frosting {
             position: absolute;
-        }
-
-        .secret-message:before {
-            top: -10px;
-            left: -20px;
-        }
-
-        .secret-message:after {
-            bottom: -40px;
-            right: -20px;
-        }
-
-      
-        /* Interactive Cake */
-        .cake-section {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .cake-container {
-            position: relative;
-            height: 300px;
-            margin: 40px auto;
-        }
-
-        .cake {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 250px;
-            height: 150px;
-            background: linear-gradient(to bottom, #ffb6c1, #ff7e5f); /* Reverted to original cake colors */
-            border-radius: 50% 50% 0 0;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .cake:hover {
-            transform: translateX(-50%) scale(1.05);
+            top: -20px;
+            left: -5%;
+            width: 110%;
+            height: 60px;
+            background: #fff; /* White frosting */
+            border-radius: 50%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            z-index: 2;
         }
 
         .candle {
             position: absolute;
-            width: 8px;
-            height: 60px;
-            background: #fff;
-            top: -60px;
-            border-radius: 4px 4px 0 0;
+            width: 10px;
+            height: 50px;
+            background: #ff4d4d; /* Red candle */
+            border-radius: 5px;
+            z-index: 3;
+            bottom: calc(100% - 20px); /* Position above frosting */
+            transform-origin: bottom;
+            transition: transform 0.5s ease, opacity 0.5s ease;
         }
-
-        .candle:nth-child(1) { left: 35%; }
-        .candle:nth-child(2) { left: 50%; }
-        .candle:nth-child(3) { left: 65%; }
+        .candle:nth-child(1) { left: 25%; }
+        .candle:nth-child(2) { left: 50%; transform: translateX(-50%); }
+        .candle:nth-child(3) { left: 75%; }
 
         .flame {
             position: absolute;
-            width: 15px;
-            height: 30px;
-            background: linear-gradient(to top, #ffd700, #ff7e5f); /* Keep warm flame colors */
-            border-radius: 50% 50% 20% 20%;
-            top: -90px;
-            animation: flicker 1.5s infinite alternate;
-            opacity: 0.8;
-        }
-
-        .flame:nth-child(4) { left: 34%; }
-        .flame:nth-child(5) { left: 49%; }
-        .flame:nth-child(6) { left: 64%; }
-
-        @keyframes flicker {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-
-        .blow-btn {
-            padding: 12px 30px;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted to original button gradient */
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-weight: 600;
-            margin-top: 30px;
-        }
-
-        .blow-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4); /* Reverted to original shadow */
-            background: linear-gradient(45deg, #ff7e5f, #feb47b); /* Reverted to original hover background */
-        }
-
-        /* Message Box */
-        .message-box-container {
-            position: fixed;
-            top: -100px;
+            top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
-            background: rgba(255, 255, 255, 0.15); /* Reverted to original glass background */
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
+            width: 15px;
+            height: 20px;
+            background: radial-gradient(circle, #ffeb3b, #ff9800); /* Yellow to orange flame */
+            border-radius: 50% 50% 20% 20% / 100% 100% 0 0;
+            box-shadow: 0 0 10px #ffeb3b;
+            animation: flicker 0.5s infinite alternate;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-50%) scale(1.05); opacity: 0.9; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+
+        .candle-button {
+            padding: 12px 30px;
+            background: var(--button-gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+        }
+
+        .candle-button:hover:not(:disabled) {
+            background: var(--button-hover-gradient);
+            transform: translateY(-2px);
+        }
+
+        .candle-button:disabled {
+            background: #555;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        #wish-message {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        #wish-message.visible {
+            opacity: 1;
+        }
+
+        /* Secret Message Section */
+        .secret-message-section {
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to original shadow */
-            border: none; /* Reverted to no border */
-            z-index: 100;
-            cursor: pointer;
-            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 50px;
+            padding: 30px;
+            background: var(--glass-bg);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden; /* For heart animation */
+            position: relative;
         }
 
-        .message-box-container.show {
-            top: 30px;
-            animation: bounce 0.8s ease;
+        .secret-message-section i.fa-heart {
+            font-size: 3rem;
+            color: var(--accent-pink);
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite alternate;
+            position: relative;
+            z-index: 2;
         }
 
-        @keyframes bounce {
-            0% { top: -100px; }
-            50% { top: 50px; }
-            70% { top: 25px; }
-            100% { top: 30px; }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
-        .message-title {
-            font-size: 1.2rem;
-            color: var(--accent-pink); /* Accent color */
-            margin-bottom: 10px;
+        .secret-message-section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        .message-content {
-            font-size: 1rem;
-            color: #e0e0ff; /* Reverted to original color */
-            line-height: 1.5;
-        }
-
-        .close-btn {
+        /* Background hearts for secret message */
+        .secret-message-section .heart-bg {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 25px;
-            height: 25px;
-            background: rgba(255, 182, 193, 0.3); /* Reverted to original background */
-            color: white; /* Reverted to white */
+            background: rgba(255, 182, 193, 0.1);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            cursor: pointer;
-            border: none; /* Reverted to no border */
+            opacity: 0;
+            animation: floatHeart 10s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        .secret-message-section .heart-bg:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
+        .secret-message-section .heart-bg:nth-child(2) { width: 120px; height: 120px; bottom: 15%; right: 15%; animation-delay: 2s; }
+        .secret-message-section .heart-bg:nth-child(3) { width: 60px; height: 60px; top: 50%; left: 5%; animation-delay: 4s; }
+        .secret-message-section .heart-bg:nth-child(4) { width: 100px; height: 100px; top: 20%; right: 5%; animation-delay: 6s; }
+        .secret-message-section .heart-bg:nth-child(5) { width: 90px; height: 90px; bottom: 5%; left: 20%; animation-delay: 8s; }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            20% { transform: translateY(-20px) scale(1); opacity: 0.5; }
+            80% { transform: translateY(-80px) scale(0.8); opacity: 0.3; }
+            100% { transform: translateY(-100px) scale(0); opacity: 0; }
         }
 
         /* Guestbook Section */
         .guestbook-section {
-            background: rgba(255, 255, 255, 0.05); /* Reverted to original glass background */
-            backdrop-filter: blur(10px);
-            border: none; /* Reverted to no border */
-            max-width: 800px;
-            margin: 40px auto;
             padding: 30px;
+            background: var(--glass-bg);
             border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Reverted to original shadow */
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            margin-bottom: 50px;
         }
 
         .guestbook-form {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        .guestbook-form .password-input { /* Reusing password-input style */
-            width: 100%;
-            text-align: left; /* Align text left for input */
-            background: rgba(255, 255, 255, 0.15); /* Reverted to original input background */
-            color: white; /* Reverted to white */
-            border: none; /* Reverted to no border */
+        .guestbook-form input,
+        .guestbook-form textarea {
+            width: calc(100% - 40px);
+            padding: 12px 20px;
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            background: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
         }
-        .guestbook-form .password-input::placeholder {
-            color: rgba(255, 255, 255, 0.6); /* Reverted to original placeholder color */
+
+        .guestbook-form input::placeholder,
+        .guestbook-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .guestbook-form input:focus,
+        .guestbook-form textarea:focus {
+            border-color: var(--accent-pink);
         }
 
         .guestbook-form textarea {
-            min-height: 80px;
+            min-height: 100px;
             resize: vertical;
         }
 
-        .wish-list-container {
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: 10px; /* For scrollbar */
-            text-align: left;
+        .guestbook-form button {
+            padding: 12px 30px;
+            background: var(--button-gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.2s ease;
+            align-self: flex-start;
+        }
+
+        .guestbook-form button:hover {
+            background: var(--button-hover-gradient);
+            transform: translateY(-2px);
+        }
+
+        .wish-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .wish-item {
-            background: rgba(255, 255, 255, 0.1); /* Reverted to original glass background */
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Reverted to original shadow */
-            border: none; /* Reverted to no border */
+            background: rgba(255, 255, 255, 0.08); /* Slightly lighter glass */
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
-        .wish-text {
+        .wish-item .wish-text {
             font-size: 1rem;
-            color: #e0e0ff; /* Reverted to original color */
             line-height: 1.6;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        .wish-author {
-            font-size: 0.85rem;
-            color: var(--accent-pink); /* Accent color */
-            font-style: italic;
+        .wish-item .wish-author {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-pink);
             text-align: right;
+            margin: 0;
+        }
+
+        /* Custom Message Popup */
+        .custom-message-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--glass-bg);
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--box-shadow);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            text-align: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            max-width: 350px;
+            width: 90%;
+        }
+
+        .custom-message-popup.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .custom-message-popup p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .custom-message-popup button {
+            padding: 10px 25px;
+            background: var(--button-gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .custom-message-popup button:hover {
+            background: var(--button-hover-gradient);
         }
 
 
         /* Footer */
-        footer {
+        .footer {
             text-align: center;
-            padding: 30px 20px;
-            color: #aaa; /* Reverted to original color */
+            margin-top: 40px;
+            padding: 20px;
             font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Reverted to original border */
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .footer-heart {
-            color: #ff6b6b; /* Reverted to original color */
-            margin: 0 5px;
+        .footer a {
+            color: var(--accent-pink);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
 
-        .linker{
-          background-color: #ff6b6b; /* Reverted to original background */  
-          color: white;
-          text-decoration: none;
-          padding: 2.65%;
-          margin: 10px;
-          border-radius: 50px;
-          transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .linker:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4); /* Reverted to original shadow */
-            background-color: #ff6b6b; /* Reverted to original hover background */
+        .footer a:hover {
+            color: #fff;
         }
 
-        /* Responsive Design (Heights are now managed by aspect ratio) */
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .birthday-title {
-                font-size: 3.5rem;
+            .header-section h1 {
+                font-size: 3rem;
             }
-            
-            .name-title {
+            .header-section h2 {
+                font-size: 1.5rem;
+            }
+            .header-section p {
+                font-size: 1rem;
+            }
+
+            .countdown-item span {
                 font-size: 2rem;
             }
-            
-            /* main-image-container height is now controlled by padding-bottom */
-            
-            .password-title {
+            .countdown-item p {
+                font-size: 0.8rem;
+            }
+
+            .section-title {
                 font-size: 1.8rem;
             }
-            
-            .secret-message {
-                font-size: 1.2rem;
-            }
-            
-          
-            .countdown-box {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .countdown-value {
-                font-size: 2rem;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .birthday-title {
-                font-size: 2.8rem;
+            /* Image Gallery Adjustments */
+            .main-image-container {
+                padding-bottom: 75%; /* More square-like for tablets/smaller desktops (4:3 aspect ratio) */
             }
-            
-            .name-title {
-                font-size: 1.7rem;
+            .image-caption {
+                font-size: 1rem; /* Slightly larger on mobile */
             }
-            
-            /* main-image-container height is now controlled by padding-bottom */
-            
-            .password-container {
-                padding: 30px 20px;
-            }
-            
-            .password-title {
-                font-size: 1.6rem;
-            }
-            
-            .thumbnails-container {
-                gap: 10px;
-            }
-            
+
             .thumbnail {
                 width: 60px;
                 height: 60px;
             }
-            
-            .cake {
-                width: 200px;
+
+            .cake-section h2, .secret-message-section h2, .guestbook-section h2 {
+                font-size: 2rem;
             }
-            
-            .countdown-box {
-                width: 80px;
-                height: 80px;
+            .secret-message-section p {
+                font-size: 1rem;
             }
-            
-            .countdown-value {
-                font-size: 1.7rem;
+            .guestbook-form input, .guestbook-form textarea {
+                width: calc(100% - 30px); /* Adjust padding for mobile */
+                padding: 10px 15px;
+            }
+            .guestbook-form button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            .wish-item {
+                padding: 15px;
+            }
+            .wish-item .wish-text {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            .header-section h1 {
+                font-size: 2.5rem;
+            }
+            .header-section h2 {
+                font-size: 1.2rem;
+            }
+            .header-section p {
+                font-size: 0.9rem;
+            }
+            .countdown-section h2 {
+                font-size: 2rem;
+            }
+            .countdown-item {
+                min-width: 70px;
+                padding: 15px 10px;
+            }
+            .countdown-item span {
+                font-size: 1.8rem;
+            }
+            .countdown-item p {
+                font-size: 0.7rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .gallery-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+
+            /* Even larger image and caption for very small screens */
+            .main-image-container {
+                padding-bottom: 85%; /* Even taller for small phones, almost square */
+            }
+            .image-caption {
+                font-size: 1.1rem; /* Even larger for better readability on very small screens */
+                padding: 10px 18px; /* Increase padding for better touch area */
+            }
+
+            .thumbnail {
+                width: 50px;
+                height: 50px;
+                border-radius: 10px;
+            }
+
+            .cake-section h2 {
+                font-size: 1.8rem;
+            }
+            .candle-button {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+            #wish-message {
+                font-size: 1rem;
+            }
+            .secret-message-section p {
+                font-size: 0.9rem;
+            }
+            .guestbook-section h2 {
+                font-size: 1.8rem;
+            }
+            .guestbook-form input, .guestbook-form textarea {
+                font-size: 0.9rem;
+            }
+            .guestbook-form button {
+                font-size: 0.95rem;
+            }
+            .wish-item .wish-text {
+                font-size: 0.9rem;
+            }
+            .wish-item .wish-author {
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Preloader -->
     <div id="preloader">
-        <div class="loader">
-            <div class="loader-inner"></div>
-            <div class="loader-circle"></div>
-        </div>
-        <div class="loader-text">Loading Special Moments...</div>
+        <div class="loader"></div>
+        <p>Loading Special Moments...</p>
     </div>
 
-    <!-- Password Screen -->
     <div id="password-screen">
-        <div class="lock-icon">
-            <i class="fas fa-lock"></i>
-        </div>
         <div class="password-container">
-            <h2 class="password-title">Unlock the Celebration</h2>
-            <p class="password-subtitle">Enter the special date to reveal the birthday surprise</p>
-            <div class="password-form">
-                <input type="password" class="password-input" id="password-input" placeholder="Enter DDMM (e.g., 2408)" autocomplete="off">
-                <button class="submit-btn" id="submit-btn">Unlock Celebration</button>
-                <div class="error-message" id="error-message"></div>
+            <i class="fa-solid fa-lock"></i>
+            <h2>Unlock the Celebration</h2>
+            <p>Enter the special date to reveal the birthday surprise!</p>
+            <div class="password-input-group">
+                <input type="password" id="password-input" placeholder="DDMM">
+                <button id="password-button">Enter</button>
             </div>
+            <p class="password-error" id="password-error">That's not quite right. Try again!</p>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div id="main-content">
-        <!-- Particle Background -->
-        <div id="particles-js"></div>
+    <div id="particles-js"></div>
 
-        <!-- Message Box -->
-        <div class="message-box-container" id="message-box">
-            <div class="close-btn" id="close-btn">
-                <i class="fas fa-times"></i>
-            </div>
-            <h3 class="message-title">Special Message</h3>
-            <p class="message-content">Click here to reveal a special birthday wish!</p>
+    <div class="container" id="main-content">
+        <div class="message-box" id="special-message-box">
+            <i class="fa-solid fa-times close-btn" id="close-message-btn"></i>
+            <h3 id="message-box-title">Special Message</h3>
+            <p id="message-box-content">Click here to reveal a special birthday wish!</p>
         </div>
 
-        <header>
-            <h1 class="birthday-title">Happy Birthday</h1>
-            <h2 class="name-title">To My Amazing Sister ❤️</h2>
-            <p class="birthday-message">
-                Today is all about celebrating you and the wonderful person you are. 
-                May your day be filled with joy, laughter, and all the things that make you smile.
-            </p>
-        </header>
+        <section class="header-section">
+            <h1 class="section-title">Happy Birthday</h1>
+            <h2>To My Amazing Sister ❤️</h2>
+            <p>On this wonderful day, I want to wish you all the happiness, joy, and love in the world. May your special day be filled with laughter, unforgettable moments, and everything you've ever wished for!</p>
+        </section>
 
-        <!-- Countdown Section -->
         <section class="countdown-section">
-            <h2 class="section-title">Countdown to Your Birthday</h2>
-            <div class="countdown-container" id="countdown-container">
-                <div class="countdown-box">
-                    <div class="countdown-value" id="days">00</div>
-                    <div class="countdown-label">Days</div>
+            <h2 class="section-title">Countdown to Your Birthday!</h2>
+            <div id="countdown">
+                <div class="countdown-item">
+                    <span id="days">00</span>
+                    <p>Days</p>
                 </div>
-                <div class="countdown-box">
-                    <div class="countdown-value" id="hours">00</div>
-                    <div class="countdown-label">Hours</div>
+                <div class="countdown-item">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
                 </div>
-                <div class="countdown-box">
-                    <div class="countdown-value" id="minutes">00</div>
-                    <div class="countdown-label">Minutes</div>
+                <div class="countdown-item">
+                    <span id="minutes">00</span>
+                    <p>Minutes</p>
                 </div>
-                <div class="countdown-box">
-                    <div class="countdown-value" id="seconds">00</div>
-                    <div class="countdown-label">Seconds</div>
+                <div class="countdown-item">
+                    <span id="seconds">00</span>
+                    <p>Seconds</p>
                 </div>
             </div>
         </section>
 
         <section class="gallery-section">
-            <h2 class="section-title">Special Moments</h2>
+            <h2 class="section-title">Special Moments Together</h2>
             <div class="gallery-container">
                 <div class="main-image-container">
-                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Birthday Celebration" class="main-image" id="main-image">
-                    <div class="image-caption" id="image-caption"></div>
+                    <img src="https://i.postimg.cc/d1V1LSNd/5994820480680442811.jpg" alt="Gallery Image" class="main-image">
+                    <p class="image-caption">Our first adventure together! So many laughs.</p>
                 </div>
-                
                 <div class="gallery-controls">
-                    <button class="nav-btn" id="prev-btn">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="nav-btn" id="next-btn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                    <button class="gallery-btn" id="prev-btn"><i class="fas fa-chevron-left"></i> Previous</button>
+                    <button class="gallery-btn" id="next-btn">Next <i class="fas fa-chevron-right"></i></button>
                 </div>
-                
-                <div class="thumbnails-container" id="thumbnails-container">
-                    <!-- Thumbnails will be generated by JavaScript -->
-                </div>
+                <div class="thumbnail-container" id="thumbnail-container">
+                    </div>
             </div>
         </section>
-
 
         <section class="cake-section">
             <h2 class="section-title">Make a Wish!</h2>
             <div class="cake-container">
-                <div class="cake" id="birthday-cake">
-                    <div class="candle"></div>
-                    <div class="candle"></div>
-                    <div class="candle"></div>
-                    <div class="flame"></div>
-                    <div class="flame"></div>
-                    <div class="flame"></div>
+                <div class="cake">
+                    <div class="frosting"></div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
                 </div>
             </div>
-            <button class="blow-btn" id="blow-btn">Blow Out Candles</button>
+            <button class="candle-button" id="blow-candles-btn">Blow Out Candles</button>
+            <p id="wish-message"></p>
         </section>
 
-        <section class="secret-section">
-            <div class="heart-icon">
-                <i class="fas fa-heart"></i>
-            </div>
-            <p class="secret-message">
-                Seeing you smile makes my day brighter. Your kindness, laughter, and beautiful spirit 
-                have made a lasting impression. Wishing you the most wonderful birthday filled with 
-                everything that brings you happiness.
-            </p>
+        <section class="secret-message-section">
+            <h2 class="section-title">A Little Something Just For You</h2>
+            <i class="fa-solid fa-heart"></i>
+            <p>Seeing you smile makes my day brighter. Your kindness, laughter, and beautiful spirit have made a lasting impression. Wishing you the most wonderful birthday filled with everything that brings you happiness.</p>
+            <div class="heart-bg"></div>
+            <div class="heart-bg"></div>
+            <div class="heart-bg"></div>
+            <div class="heart-bg"></div>
+            <div class="heart-bg"></div>
         </section>
 
-        <!-- Guestbook Section -->
         <section class="guestbook-section">
             <h2 class="section-title">Leave a Birthday Wish!</h2>
             <div class="guestbook-form">
-                <input type="text" id="guestbook-name" placeholder="Your Name" class="password-input">
-                <textarea id="guestbook-message" placeholder="Your Birthday Wish" class="password-input" rows="3"></textarea>
-                <button id="submit-wish" class="submit-btn">Post Wish</button>
+                <input type="text" id="guestbook-name" placeholder="Your Name">
+                <textarea id="guestbook-message" placeholder="Write your birthday wish here..."></textarea>
+                <button id="submit-wish-btn">Send Wish</button>
             </div>
-            <div class="wish-list-container" id="wish-list-container">
-                <!-- Wishes will be appended here by JavaScript -->
-            </div>
+            <div class="wish-list" id="wish-list-container">
+                </div>
         </section>
-
-        <footer>
-        <a class="linker" href="https://hbdwish.gourav.sh/Fauziyah/2">Click Here</a>
-        </footer>
     </div>
 
-    <!-- Audio for background music -->
+    <div class="custom-message-popup" id="custom-message-popup">
+        <p id="custom-message-text"></p>
+        <button id="custom-message-close-btn">OK</button>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Special Birthday Wish. Designed with ❤️ for you. <a href="https://hbdwish.gourav.sh/Fauziyah/2" target="_blank">Click Here</a></p>
+    </footer>
+
     <audio id="background-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Preloader
-            setTimeout(function() {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('preloader').style.display = 'none';
-                    document.getElementById('password-screen').style.display = 'flex';
-                }, 800);
-            }, 2500);
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.getElementById('preloader');
+            const passwordScreen = document.getElementById('password-screen');
+            const passwordInput = document.getElementById('password-input');
+            const passwordButton = document.getElementById('password-button');
+            const passwordError = document.getElementById('password-error');
+            const mainContent = document.getElementById('main-content');
+            const backgroundMusic = document.getElementById('background-music');
 
-            // Initialize Particles.js
-            particlesJS('particles-js', {
+            // --- Preloader & Password Logic ---
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 500); // Fade out
+            }, 2500); // Show preloader for 2.5 seconds
+
+            passwordButton.addEventListener('click', () => {
+                const enteredPassword = passwordInput.value.trim();
+                const correctPassword = "2408"; // DDMM format for July 26th
+
+                if (enteredPassword === correctPassword) {
+                    passwordScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        passwordScreen.style.display = 'none';
+                        mainContent.style.opacity = '1'; // Show main content
+                        
+                        // Play music
+                        backgroundMusic.volume = 0.4; // 40% volume
+                        backgroundMusic.play().catch(e => console.log("Music play failed:", e));
+
+                        // Trigger initial confetti after content is visible
+                        setTimeout(() => {
+                            triggerConfetti({
+                                particleCount: 150,
+                                spread: 120,
+                                origin: { y: 0.6 },
+                                colors: ['#ffb6c1', '#ff7e5f', '#feb47b', '#ffffff', '#e0e0e0']
+                            });
+                        }, 1500); // 1.5 seconds after screen transition
+
+                        // Show special message box after a delay
+                        setTimeout(() => {
+                            document.getElementById('special-message-box').classList.add('visible');
+                        }, 3000); // 3 seconds after screen transition
+
+                    }, 500); // Fade out duration
+                } else {
+                    passwordError.classList.add('visible');
+                    passwordInput.classList.add('shake');
+                    setTimeout(() => {
+                        passwordInput.classList.remove('shake');
+                    }, 500);
+                }
+            });
+
+            // Allow Enter key for password
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    passwordButton.click();
+                }
+            });
+
+
+            // --- Particles.js Initialization ---
+            particlesJS("particles-js", {
                 "particles": {
                     "number": {
                         "value": 80,
@@ -1012,20 +1207,28 @@
                         }
                     },
                     "color": {
-                        "value": "#ffb6c1" // Reverted to original particle color
+                        "value": "#ffb6c1" /* Pink particles */
                     },
                     "shape": {
                         "type": "circle",
                         "stroke": {
                             "width": 0,
                             "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        },
+                        "image": {
+                            "src": "img/github.svg",
+                            "width": 100,
+                            "height": 100
                         }
                     },
                     "opacity": {
                         "value": 0.5,
-                        "random": true,
+                        "random": false,
                         "anim": {
-                            "enable": true,
+                            "enable": false,
                             "speed": 1,
                             "opacity_min": 0.1,
                             "sync": false
@@ -1035,8 +1238,8 @@
                         "value": 3,
                         "random": true,
                         "anim": {
-                            "enable": true,
-                            "speed": 2,
+                            "enable": false,
+                            "speed": 40,
                             "size_min": 0.1,
                             "sync": false
                         }
@@ -1044,18 +1247,23 @@
                     "line_linked": {
                         "enable": true,
                         "distance": 150,
-                        "color": "#ffb6c1", // Reverted to original line color
-                        "opacity": 0.3,
+                        "color": "#ffb6c1", /* Pink lines */
+                        "opacity": 0.4,
                         "width": 1
                     },
                     "move": {
                         "enable": true,
-                        "speed": 1,
+                        "speed": 3,
                         "direction": "none",
-                        "random": true,
+                        "random": false,
                         "straight": false,
                         "out_mode": "out",
-                        "bounce": false
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
                     }
                 },
                 "interactivity": {
@@ -1063,7 +1271,7 @@
                     "events": {
                         "onhover": {
                             "enable": true,
-                            "mode": "grab"
+                            "mode": "repulse"
                         },
                         "onclick": {
                             "enable": true,
@@ -1073,364 +1281,229 @@
                     },
                     "modes": {
                         "grab": {
-                            "distance": 140,
+                            "distance": 400,
                             "line_linked": {
                                 "opacity": 1
                             }
                         },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
                         "push": {
                             "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
                         }
                     }
                 },
                 "retina_detect": true
             });
 
-            // Password handling
-            const passwordScreen = document.getElementById('password-screen');
-            const passwordInput = document.getElementById('password-input');
-            const submitBtn = document.getElementById('submit-btn');
-            const errorMessage = document.getElementById('error-message');
-            const mainContent = document.getElementById('main-content');
-            const backgroundMusic = document.getElementById('background-music');
-            
-            // Set the correct password (DDMM format)
-            const correctPassword = "2408"; // Change to her actual birth date
-            
-            submitBtn.addEventListener('click', checkPassword);
-            passwordInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkPassword();
+            // --- Special Message Box Logic ---
+            const messageBox = document.getElementById('special-message-box');
+            const messageBoxTitle = document.getElementById('message-box-title');
+            const messageBoxContent = document.getElementById('message-box-content');
+            const closeMessageBtn = document.getElementById('close-message-btn');
+
+            messageBox.addEventListener('click', () => {
+                if (!messageBox.classList.contains('expanded')) {
+                    messageBoxTitle.textContent = "Special Birthday Wish";
+                    messageBoxContent.textContent = "I hope your birthday is as beautiful and special as you are! Every moment with you is precious. ❤️";
+                    messageBoxContent.classList.add('expanded');
+                    messageBox.classList.add('expanded');
+                    triggerConfetti({
+                        particleCount: 100,
+                        spread: 90,
+                        origin: { y: 0.6 },
+                        colors: ['#ffb6c1', '#ff7e5f', '#feb47b', '#ffffff', '#e0e0e0'],
+                        shapes: ['circle', 'square', 'star']
+                    });
                 }
             });
-            
-            function checkPassword() {
-                const enteredPassword = passwordInput.value;
-                
-                if (enteredPassword === correctPassword) {
-                    // Hide password screen
-                    passwordScreen.style.opacity = '0';
-                    passwordScreen.style.visibility = 'hidden';
-                    
-                    // Show main content
-                    mainContent.style.display = 'block';
-                    setTimeout(() => {
-                        mainContent.style.opacity = '1';
-                    }, 100);
-                    
-                    // Play background music
-                    backgroundMusic.volume = 0.4;
-                    backgroundMusic.play().catch(e => {
-                        console.log("Autoplay prevented. User interaction required.");
-                    });
-                    
-                    // Trigger confetti celebration with diverse shapes/colors
-                    setTimeout(() => {
-                        confetti({
-                            particleCount: 150,
-                            spread: 70,
-                            origin: { y: 0.6 },
-                            shapes: ['circle', 'square', 'star'], // Added shapes
-                            colors: ['#ffb6c1', '#ff7e5f', '#feb47b', '#ffffff', '#e0e0ff'] // Reverted to original colors
-                        });
-                    }, 1500);
-                    
-                    // Show message box after delay
-                    setTimeout(() => {
-                        document.getElementById('message-box').classList.add('show');
-                    }, 3000);
-                    
-                } else {
-                    errorMessage.textContent = "That's not quite right. Try again!";
-                    passwordInput.value = '';
-                    passwordInput.focus();
-                    
-                    // Shake animation for error
-                    passwordInput.style.animation = 'shake 0.5s';
-                    setTimeout(() => {
-                        passwordInput.style.animation = '';
-                    }, 500);
-                }
-            }
-            
-            // Create keyframes for shake animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    20%, 60% { transform: translateX(-5px); }
-                    40%, 80% { transform: translateX(5px); }
-                }
-            `;
-            document.head.appendChild(style);
 
-            // Image Gallery with Captions
-            const images = [
-                {
-                    main: "https://i.postimg.cc/d1V1LSNd/5994820480680442811.jpg",
-                    thumb: "https://i.postimg.cc/d1V1LSNd/5994820480680442811.jpg",
-                    caption: "Our first adventure together! So many laughs."
-                },
-                {
-                    main: "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    thumb: "https://images.unsplash.com/photo-1516726817505-f5ed825624d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
-                    caption: "Remember this fun day at the park? Pure joy!"
-                },
-                {
-                    main: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    thumb: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
-                    caption: "Always shining bright, no matter what."
-                },
-                {
-                    main: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    thumb: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
-                    caption: "A candid moment, capturing your beautiful spirit."
-                },
-                {
-                    main: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    thumb: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
-                    caption: "Through thick and thin, always by my side."
-                }
-            ];
+            closeMessageBtn.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent message box from expanding again
+                messageBox.classList.remove('expanded');
+                messageBox.classList.remove('visible');
+                messageBoxTitle.textContent = "Special Message";
+                messageBoxContent.textContent = "Click here to reveal a special birthday wish!";
+                messageBoxContent.classList.remove('expanded');
+            });
 
-            const mainImage = document.getElementById('main-image');
-            const imageCaption = document.getElementById('image-caption'); // New element
-            const thumbnailsContainer = document.getElementById('thumbnails-container');
+
+            // --- Countdown Logic ---
+            const birthday = new Date("July 26, " + new Date().getFullYear() + " 00:00:00").getTime();
+
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                let distance = birthday - now;
+
+                // If the birthday has passed this year, set it for next year
+                if (distance < 0) {
+                    const nextYearBirthday = new Date("July 26, " + (new Date().getFullYear() + 1) + " 00:00:00").getTime();
+                    distance = nextYearBirthday - now;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+                document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+                document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+                document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").innerHTML = "HAPPY BIRTHDAY!";
+                }
+            }, 1000);
+
+
+            // --- Image Gallery Logic ---
+            const mainImage = document.querySelector('.main-image');
+            const imageCaption = document.querySelector('.image-caption');
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
+            const thumbnailContainer = document.getElementById('thumbnail-container');
+
+            const images = [
+                { src: "https://i.postimg.cc/d1V1LSNd/5994820480680442811.jpg", caption: "Our first adventure together! So many laughs." },
+                { src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", caption: "Remember this fun day at the park? Pure joy!" },
+                { src: "https://images.unsplash.com/photo-1507003211169-0a86b5a38348?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", caption: "Always shining bright, no matter what." },
+                { src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", caption: "A candid moment, capturing your beautiful spirit." },
+                { src: "https://images.unsplash.com/photo-1507003211169-0a86b5a38348?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", caption: "Through thick and thin, always by my side." }
+            ];
             let currentImageIndex = 0;
+            let autoSlideInterval;
 
-            // Create thumbnails
-            images.forEach((image, index) => {
-                const thumbnail = document.createElement('div');
-                thumbnail.className = 'thumbnail';
-                if (index === 0) thumbnail.classList.add('active');
-                
-                const img = document.createElement('img');
-                img.src = image.thumb;
-                img.alt = `Thumbnail ${index + 1}`;
-                
-                thumbnail.appendChild(img);
-                thumbnail.addEventListener('click', () => {
-                    setActiveImage(index);
+            function updateGallery() {
+                mainImage.style.opacity = 0; // Fade out current image
+                setTimeout(() => {
+                    mainImage.src = images[currentImageIndex].src;
+                    imageCaption.textContent = images[currentImageIndex].caption;
+                    mainImage.style.opacity = 1; // Fade in new image
+                    updateThumbnails();
+                }, 500); // Wait for fade out
+            }
+
+            function updateThumbnails() {
+                thumbnailContainer.innerHTML = ''; // Clear existing thumbnails
+                images.forEach((img, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = img.src;
+                    thumb.alt = `Thumbnail ${index + 1}`;
+                    thumb.classList.add('thumbnail');
+                    if (index === currentImageIndex) {
+                        thumb.classList.add('active');
+                    }
+                    thumb.addEventListener('click', () => {
+                        currentImageIndex = index;
+                        updateGallery();
+                        resetAutoSlide();
+                    });
+                    thumbnailContainer.appendChild(thumb);
                 });
-                
-                thumbnailsContainer.appendChild(thumbnail);
-            });
+            }
 
-            // Navigation buttons
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(() => {
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                    updateGallery();
+                }, 5000); // Change image every 5 seconds
+            }
+
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+
             prevBtn.addEventListener('click', () => {
-                const newIndex = (currentImageIndex - 1 + images.length) % images.length;
-                setActiveImage(newIndex);
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updateGallery();
+                resetAutoSlide();
             });
 
             nextBtn.addEventListener('click', () => {
-                const newIndex = (currentImageIndex + 1) % images.length;
-                setActiveImage(newIndex);
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updateGallery();
+                resetAutoSlide();
             });
 
-            // Auto-rotate images
-            setInterval(() => {
-                const newIndex = (currentImageIndex + 1) % images.length;
-                setActiveImage(newIndex);
-            }, 5000);
-
-            function setActiveImage(index) {
-                currentImageIndex = index;
-                mainImage.style.opacity = 0; // Fade out current image
-                setTimeout(() => {
-                    mainImage.src = images[index].main;
-                    imageCaption.textContent = images[index].caption; // Update caption
-                    imageCaption.style.opacity = 1; // Make caption visible
-                    mainImage.style.opacity = 1; // Fade in new image
-                }, 500); // Match this with the CSS transition duration
-
-                // Update active thumbnail
-                document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
-                    if (i === index) {
-                        thumb.classList.add('active');
-                    } else {
-                        thumb.classList.remove('active');
-                    }
-                });
-            }
-            // Initialize first image caption
-            setActiveImage(0);
+            // Initialize gallery
+            updateGallery();
+            startAutoSlide();
 
 
-            // Floating hearts animation
-            function createHearts() {
-                const heartCount = 15;
-                
-                for (let i = 0; i < heartCount; i++) {
-                    const heart = document.createElement('div');
-                    heart.innerHTML = '💕'; // Changed to single heart emoji
-                    heart.style.position = 'fixed';
-                    heart.style.fontSize = Math.random() * 10 + 15 + 'px'; // Slightly larger
-                    heart.style.left = Math.random() * 90 + 'vw'; // Wider spread
-                    heart.style.top = '105vh';
-                    heart.style.opacity = Math.random() * 0.3 + 0.5; // More opaque
-                    heart.style.color = `#ff6b6b`; // Reverted to original heart color
-                    heart.style.pointerEvents = 'none';
-                    heart.style.zIndex = '0';
-                    heart.style.animation = `floatHeart ${Math.random() * 5 + 4}s linear infinite`;
-                    
-                    document.body.appendChild(heart);
-                    
-                    // Remove heart after animation completes
-                    setTimeout(() => {
-                        heart.remove();
-                    }, 10000);
-                }
-                
-                // Add keyframes for animation
-                const heartStyle = document.createElement('style');
-                heartStyle.textContent = `
-                    @keyframes floatHeart {
-                        0% {
-                            transform: translateY(0) rotate(0deg);
-                            opacity: ${Math.random() * 0.5 + 0.5};
-                        }
-                        100% {
-                            transform: translateY(-100vh) rotate(${Math.random() * 360}deg);
-                            opacity: 0;
-                        }
-                    }
-                `;
-                document.head.appendChild(heartStyle);
-            }
-            
-            // Create hearts periodically
-            setInterval(createHearts, 1000);
-            createHearts();
-
-            // Interactive cake
-            const blowBtn = document.getElementById('blow-btn');
+            // --- Interactive Cake Logic ---
+            const blowCandlesBtn = document.getElementById('blow-candles-btn');
             const flames = document.querySelectorAll('.flame');
-            
-            blowBtn.addEventListener('click', function() {
-                // Hide flames
+            const wishMessage = document.getElementById('wish-message');
+
+            blowCandlesBtn.addEventListener('click', () => {
                 flames.forEach(flame => {
-                    flame.style.animation = 'none';
                     flame.style.opacity = '0';
-                    flame.style.transform = 'scale(0)';
+                    flame.style.transform = 'translateX(-50%) scale(0)';
                 });
-                
-                // Create smoke effect with diverse confetti
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        confetti({
-                            particleCount: 30,
-                            spread: 70,
-                            origin: { y: 0.4 },
-                            colors: ['#ffffff', '#cccccc', '#aaaaaa', '#f0f0f0'], // Smoke colors
-                            shapes: ['circle', 'square'] // Added shapes
-                        });
-                    }, i * 200);
-                }
-                
-                // Show wish message (using custom modal instead of alert)
-                showCustomMessage("Your wish has been sent to the universe! ✨");
-                
-                // Disable button after blowing
-                this.disabled = true;
-                this.textContent = "Wish Granted!";
-                this.style.background = "linear-gradient(45deg, #ff7e5f, #feb47b)"; // Reverted to original button gradient
-            });
+                blowCandlesBtn.disabled = true;
+                blowCandlesBtn.textContent = "Wish Granted!";
 
-            // Custom Message Box (replacement for alert)
-            function showCustomMessage(message) {
-                const customMessageBox = document.createElement('div');
-                customMessageBox.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: rgba(0, 0, 0, 0.8);
-                    color: white;
-                    padding: 20px 30px;
-                    border-radius: 10px;
-                    z-index: 10000;
-                    font-size: 1.2rem;
-                    text-align: center;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-                    animation: fadeIn 0.5s ease-out;
-                `;
-                customMessageBox.textContent = message;
-                document.body.appendChild(customMessageBox);
-
-                setTimeout(() => {
-                    customMessageBox.style.animation = 'fadeOut 0.5s ease-in forwards';
-                    setTimeout(() => customMessageBox.remove(), 500);
-                }, 3000); // Message visible for 3 seconds
-
-                const fadeStyle = document.createElement('style');
-                fadeStyle.textContent = `
-                    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-                    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
-                `;
-                document.head.appendChild(fadeStyle);
-            }
-
-
-            // Birthday Countdown (July 26)
-            function updateCountdown() {
-                const now = new Date();
-                const currentYear = now.getFullYear();
-                const birthday = new Date(currentYear, 6, 26); // July is month 6 (0-indexed)
-                
-                // If birthday has passed this year, set to next year
-                if (now > birthday) {
-                    birthday.setFullYear(currentYear + 1);
-                }
-                
-                const diff = birthday - now;
-                
-                // Calculate time units
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                // Update display
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            }
-            
-            // Initialize and update countdown every second
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-            
-            // Message box functionality
-            const messageBox = document.getElementById('message-box');
-            const closeBtn = document.getElementById('close-btn');
-            
-            messageBox.addEventListener('click', function() {
-                this.querySelector('.message-title').textContent = "Special Birthday Wish";
-                this.querySelector('.message-content').innerHTML = 
-                    "I hope your birthday is as beautiful and special as you are! Every moment with you is precious. ❤️";
-                
-                // Add confetti when message is revealed with diverse shapes/colors
-                confetti({
+                triggerConfetti({
                     particleCount: 100,
-                    spread: 70,
+                    spread: 80,
                     origin: { y: 0.6 },
-                    shapes: ['circle', 'star', 'square'], // Added shapes
-                    colors: ['#ffb6c1', '#ff7e5f', '#feb47b', '#ffffff', '#e0e0ff'] // Reverted to original colors
-                });
-            });
-            
-            closeBtn.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevent triggering the message box click
-                messageBox.classList.remove('show');
+                    colors: ['#cccccc', '#e0e0e0', '#ffffff'], // Smoke colors
+                    shapes: ['circle', 'square']
+                }); // Smoke effect
+
+                wishMessage.textContent = "Your wish has been sent to the universe! ✨";
+                wishMessage.classList.add('visible');
+
+                // Optional: Reset candles after a delay
+                // setTimeout(() => {
+                //     flames.forEach(flame => {
+                //         flame.style.opacity = '1';
+                //         flame.style.transform = 'translateX(-50%) scale(1)';
+                //     });
+                //     blowCandlesBtn.disabled = false;
+                //     blowCandlesBtn.textContent = "Blow Out Candles";
+                //     wishMessage.classList.remove('visible');
+                // }, 5000);
             });
 
-            // Virtual Guestbook/Wish Wall functionality
-            const submitWishBtn = document.getElementById('submit-wish');
+            // --- Confetti Function ---
+            function triggerConfetti(options) {
+                confetti(options);
+            }
+
+            // --- Custom Message Popup Logic ---
+            const customMessagePopup = document.getElementById('custom-message-popup');
+            const customMessageText = document.getElementById('custom-message-text');
+            const customMessageCloseBtn = document.getElementById('custom-message-close-btn');
+
+            function showCustomMessage(message) {
+                customMessageText.textContent = message;
+                customMessagePopup.classList.add('visible');
+            }
+
+            customMessageCloseBtn.addEventListener('click', () => {
+                customMessagePopup.classList.remove('visible');
+            });
+
+            // --- Guestbook Logic ---
             const guestbookNameInput = document.getElementById('guestbook-name');
             const guestbookMessageInput = document.getElementById('guestbook-message');
+            const submitWishBtn = document.getElementById('submit-wish-btn');
             const wishListContainer = document.getElementById('wish-list-container');
 
             submitWishBtn.addEventListener('click', () => {
