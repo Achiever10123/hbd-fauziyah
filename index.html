@@ -533,112 +533,7 @@
             min-height: 250px; /* Ensure some height for cake */
         }
 
-        .cake {
-            background: #f7d2a5; /* Cake base color */
-            border-radius: 50% 50% 0 0 / 100px 100px 0 0;
-            width: 100%;
-            height: 120px;
-            position: relative;
-            box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .cake:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: #ffe0b3; /* Lighter top */
-            border-radius: 50% 50% 0 0 / 10px 10px 0 0;
-            z-index: 1;
-        }
-
-        .frosting {
-            position: absolute;
-            top: -20px;
-            left: -5%;
-            width: 110%;
-            height: 60px;
-            background: #fff; /* White frosting */
-            border-radius: 50%;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            z-index: 2;
-        }
-
-        .candle {
-            position: absolute;
-            width: 10px;
-            height: 50px;
-            background: #ff4d4d; /* Red candle */
-            border-radius: 5px;
-            z-index: 3;
-            bottom: calc(100% - 20px); /* Position above frosting */
-            transform-origin: bottom;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-        .candle:nth-child(1) { left: 25%; }
-        .candle:nth-child(2) { left: 50%; transform: translateX(-50%); }
-        .candle:nth-child(3) { left: 75%; }
-
-        .flame {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 15px;
-            height: 20px;
-            background: radial-gradient(circle, #ffeb3b, #ff9800); /* Yellow to orange flame */
-            border-radius: 50% 50% 20% 20% / 100% 100% 0 0;
-            box-shadow: 0 0 10px #ffeb3b;
-            animation: flicker 0.5s infinite alternate;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            opacity: 1;
-            transform: translateX(-50%) scale(1);
-        }
-
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); opacity: 1; }
-            50% { transform: translateX(-50%) scale(1.05); opacity: 0.9; }
-            100% { transform: translateX(-50%) scale(1); opacity: 1; }
-        }
-
-        .candle-button {
-            padding: 12px 30px;
-            background: var(--button-gradient);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            transition: background 0.3s ease, transform 0.2s ease;
-            margin-top: 20px;
-        }
-
-        .candle-button:hover:not(:disabled) {
-            background: var(--button-hover-gradient);
-            transform: translateY(-2px);
-        }
-
-        .candle-button:disabled {
-            background: #555;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        #wish-message {
-            margin-top: 20px;
-            font-size: 1.1rem;
-            color: var(--text-color);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        #wish-message.visible {
-            opacity: 1;
-        }
-
+       
         /* Secret Message Section */
         .secret-message-section {
             text-align: center;
@@ -1077,23 +972,11 @@
         </section>
 
         <section class="cake-section">
-            <h2 class="section-title">Make a Wish!</h2>
+            <h2 class="section-title">Scan!</h2>
             <div class="cake-container">
-                <div class="cake">
-                    <div class="frosting"></div>
-                    <div class="candle">
-                        <div class="flame"></div>
-                    </div>
-                    <div class="candle">
-                        <div class="flame"></div>
-                    </div>
-                    <div class="candle">
-                        <div class="flame"></div>
-                    </div>
-                </div>
+                <img src="https://i.postimg.cc/8cy5gx7P/Untitled-design.png" alt="">
             </div>
-            <button class="candle-button" id="blow-candles-btn">Blow Out Candles</button>
-            <p id="wish-message"></p>
+            
         </section>
 
         <section class="secret-message-section">
@@ -1443,43 +1326,6 @@
             // Initialize gallery
             updateGallery();
             startAutoSlide();
-
-
-            // --- Interactive Cake Logic ---
-            const blowCandlesBtn = document.getElementById('blow-candles-btn');
-            const flames = document.querySelectorAll('.flame');
-            const wishMessage = document.getElementById('wish-message');
-
-            blowCandlesBtn.addEventListener('click', () => {
-                flames.forEach(flame => {
-                    flame.style.opacity = '0';
-                    flame.style.transform = 'translateX(-50%) scale(0)';
-                });
-                blowCandlesBtn.disabled = true;
-                blowCandlesBtn.textContent = "Wish Granted!";
-
-                triggerConfetti({
-                    particleCount: 100,
-                    spread: 80,
-                    origin: { y: 0.6 },
-                    colors: ['#cccccc', '#e0e0e0', '#ffffff'], // Smoke colors
-                    shapes: ['circle', 'square']
-                }); // Smoke effect
-
-                wishMessage.textContent = "Your wish has been sent to the universe! ✨";
-                wishMessage.classList.add('visible');
-
-                // Optional: Reset candles after a delay
-                // setTimeout(() => {
-                //     flames.forEach(flame => {
-                //         flame.style.opacity = '1';
-                //         flame.style.transform = 'translateX(-50%) scale(1)';
-                //     });
-                //     blowCandlesBtn.disabled = false;
-                //     blowCandlesBtn.textContent = "Blow Out Candles";
-                //     wishMessage.classList.remove('visible');
-                // }, 5000);
-            });
 
             // --- Confetti Function ---
             function triggerConfetti(options) {
